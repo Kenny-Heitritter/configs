@@ -120,7 +120,7 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10: "
+set $ws10 "10"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -145,8 +145,6 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
-
-assign [class="Spotify"] $ws10
 
 
 # reload the configuration file
@@ -192,7 +190,8 @@ bar {
 	hidden_state hide
 }
 
-bindsym $mod+shift+x exec i3lock --color "$bg-color"
+#bindsym $mod+shift+x exec i3lock 
+bindsym $mod+shift+x exec systemctl suspend
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
@@ -203,6 +202,13 @@ bindsym XF86AudioPlay exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+
+
+for_window [class="^Spotify"] move to workspace $ws10
+assign [class="^Slack"] $ws10
+assign [class="^firefox"] $ws1
+exec firefox
+
 
 exec spotify 
 exec always compton -f
