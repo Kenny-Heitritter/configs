@@ -207,8 +207,29 @@ bindsym XF86AudioPrev exec playerctl previous
 for_window [class="^Spotify"] move to workspace $ws10
 assign [class="^Slack"] $ws10
 assign [class="^firefox"] $ws1
+assign [class="^Code"] $ws2
+assign [class="^KeePassXC"] $ws3
+
+
+exec keepassxc
+exec code
 exec firefox
-
-
-exec spotify 
+exec spotify
+exec slack 
 exec always compton -f
+
+
+# For screenshots install :
+# apt-get install maim xclip copyq
+
+##  Screenshots in files
+bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
+bindsym $mod+Print exec --no-startup-id maim --format=png --window $(xdotool getactivewindow) "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-current.png"
+bindsym Shift+Print exec --no-startup-id maim --format=png --select "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-selected.png"
+
+## Screenshots in clipboards
+bindsym Ctrl+Print exec --no-startup-id maim --format=png | xclip -selection clipboard -t image/png
+bindsym Ctrl+$mod+Print exec --no-startup-id maim --format=png --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+bindsym Ctrl+Shift+Print exec --no-startup-id maim --format=png --select | xclip -selection clipboard -t image/png
+
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &

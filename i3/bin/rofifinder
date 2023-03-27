@@ -1,0 +1,5 @@
+cat > ~/.config/i3/bin/rofifinder << 'EOL'
+#!/bin/bash
+xdg-open "$(locate -i / | rofi -threads 0 -width 100 -dmenu -i -p "Find")"
+EOL
+
